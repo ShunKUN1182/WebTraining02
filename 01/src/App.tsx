@@ -1,9 +1,13 @@
 import "./App.css";
+import Footer from "./components/Footer.tsx";
 
 function App() {
     return (
         <>
-            <div></div>
+            <main>
+                <p></p>
+            </main>
+            <Footer />
         </>
     );
 }
