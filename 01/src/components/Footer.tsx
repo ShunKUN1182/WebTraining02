@@ -1,34 +1,31 @@
-import "./footer.css";
 import { Icon } from "@iconify/react";
+import { NavLink } from "react-router-dom";
+import "./footer.css";
+
+const navigationItems = [
+    { to: "/home", label: "ホーム", icon: "bx:home" },
+    { to: "/history", label: "履歴", icon: "reicon:memo" },
+    { to: "/calendar", label: "カレンダー", icon: "akar-icons:calendar" },
+    { to: "/statistics", label: "統計", icon: "foundation:graph-bar" },
+    { to: "/option", label: "設定", icon: "fa6-solid:gear" },
+];
 
 function Footer() {
     return (
-        <>
-            <footer>
+        <footer className="bottom-navigation">
+            <nav aria-label="メインナビゲーション">
                 <ul>
-                    <li>
-                        <Icon icon="bx:home" height="24" />
-                        <p>ホーム</p>
-                    </li>
-                    <li>
-                        <Icon icon="bx:home" height="24" />
-                        <p>履歴</p>
-                    </li>
-                    <li>
-                        <Icon icon="bx:home" height="24" />
-                        <p>統計</p>
-                    </li>
-                    <li>
-                        <Icon icon="bx:home" height="24" />
-                        <p>カレンダー</p>
-                    </li>
-                    <li>
-                        <Icon icon="bx:home" height="24" />
-                        <p>設定</p>
-                    </li>
+                    {navigationItems.map(({ to, label, icon }) => (
+                        <li key={to}>
+                            <NavLink to={to} end className={({ isActive }) => isActive ? "active" : undefined}>
+                                <Icon icon={icon} height="24" />
+                                <span>{label}</span>
+                            </NavLink>
+                        </li>
+                    ))}
                 </ul>
-            </footer>
-        </>
+            </nav>
+        </footer>
     );
 }
 

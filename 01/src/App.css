@@ -1,0 +1,258 @@
+.home-screen {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+    padding: 46px 20px 100px;
+    color: #142448;
+    font-family: -apple-system, BlinkMacSystemFont, "Noto Sans JP", sans-serif;
+}
+
+.home-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+}
+
+.home-header h1 {
+    margin: 0;
+    font-size: 27px;
+    font-weight: 750;
+    letter-spacing: 0.015em;
+}
+
+.home-header p {
+    margin: 5px 0 0;
+    color: #8490a4;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+}
+
+.settings-button {
+    display: grid;
+    width: 38px;
+    height: 38px;
+    margin-top: 1px;
+    padding: 0;
+    place-items: center;
+    border: 0;
+    background: transparent;
+    color: #243657;
+}
+
+.settings-button svg {
+    width: 24px;
+    height: 24px;
+    stroke-width: 1.8;
+}
+
+.clock-section {
+    margin-top: 45px;
+}
+
+.current-time {
+    margin: 0 0 24px;
+    color: #101f41;
+    font-size: clamp(76px, 23vw, 96px);
+    font-variant-numeric: tabular-nums;
+    font-weight: 650;
+    letter-spacing: 0.2px;
+    line-height: 1;
+}
+
+.schedule-row {
+    display: flex;
+    min-height: 64px;
+    align-items: center;
+    justify-content: space-between;
+    overflow: hidden;
+    border: 1px solid #dce5f3;
+    border-radius: 17px;
+    background: #fff;
+    box-shadow: 0 2px 5px rgb(20 36 72 / 4%);
+}
+
+.schedule-time {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    padding-left: 14px;
+    white-space: nowrap;
+}
+
+.schedule-time svg {
+    width: 24px;
+    height: 24px;
+    color: #233a62;
+    stroke-width: 2;
+}
+
+.schedule-time span {
+    color: #43516b;
+    font-size: 14px;
+    font-weight: 650;
+}
+
+.schedule-time strong {
+    color: #1a2b4a;
+    font-size: 17px;
+    font-variant-numeric: tabular-nums;
+    font-weight: 700;
+}
+
+.countdown {
+    display: flex;
+    height: 64px;
+    align-items: center;
+    gap: 3px;
+    padding: 0 16px;
+    border-radius: 999px 0 0 999px;
+    background: #f0f5fd;
+    color: #3479de;
+    white-space: nowrap;
+}
+
+.countdown span:first-child {
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.countdown strong {
+    font-size: 28px;
+    font-variant-numeric: tabular-nums;
+    font-weight: 750;
+    line-height: 1;
+}
+
+.countdown span:last-child {
+    font-size: 16px;
+    font-weight: 700;
+}
+
+.location-card {
+    display: flex;
+    width: 100%;
+    min-height: 94px;
+    align-items: center;
+    gap: 14px;
+    margin-top: 24px;
+    padding: 15px 14px 15px 18px;
+    border: 0;
+    border-radius: 18px;
+    background: #f3f6fb;
+    color: #1e3152;
+    font: inherit;
+    text-align: left;
+}
+
+.location-pin {
+    width: 27px;
+    height: 27px;
+    flex: 0 0 27px;
+    fill: #647b9c;
+    color: #647b9c;
+    stroke: #fff;
+    stroke-width: 1.6;
+}
+
+.location-details {
+    display: flex;
+    min-width: 0;
+    flex: 1;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.location-details strong {
+    font-size: 16px;
+    font-weight: 650;
+}
+
+.location-details b {
+    margin-left: 4px;
+    font-size: 18px;
+    font-variant-numeric: tabular-nums;
+}
+
+.location-details > span {
+    color: #8490a4;
+    font-size: 12px;
+    font-weight: 550;
+    white-space: nowrap;
+}
+
+.location-chevron {
+    width: 21px;
+    height: 21px;
+    flex: 0 0 21px;
+    color: #8b98ab;
+}
+
+.morning-illustration {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    padding-top: 30px;
+}
+
+.morning-illustration h2 {
+    margin: 0 0 4px;
+    color: #1d3458;
+    font-size: 21px;
+    font-weight: 700;
+    letter-spacing: 0.025em;
+}
+
+.school-art {
+    display: block;
+    width: min(100%, 350px);
+    height: auto;
+}
+
+@media (max-width: 360px) {
+    .home-screen {
+        padding-right: 16px;
+        padding-left: 16px;
+    }
+
+    .schedule-time {
+        gap: 6px;
+        padding-left: 11px;
+    }
+
+    .schedule-time span {
+        font-size: 12px;
+    }
+
+    .schedule-time strong {
+        font-size: 15px;
+    }
+
+    .countdown {
+        padding: 0 12px;
+    }
+
+    .location-details > span {
+        font-size: 11px;
+    }
+}
+
+.subpage {
+    min-height: 100vh;
+    padding: 48px 24px 110px;
+    color: #142448;
+    font-family: -apple-system, BlinkMacSystemFont, "Noto Sans JP", sans-serif;
+}
+
+.subpage h1 {
+    margin: 0;
+    font-size: 26px;
+}
+
+.subpage p {
+    margin-top: 14px;
+    color: #8490a4;
+    font-size: 14px;
+}
