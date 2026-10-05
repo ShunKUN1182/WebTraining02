@@ -7,6 +7,15 @@
     font-family: -apple-system, BlinkMacSystemFont, "Noto Sans JP", sans-serif;
 }
 
+.home-screen.is-result-screen {
+    padding-top: 36px;
+    background-color: #f8fcf9;
+}
+
+.home-screen.is-result-screen.is-late-result {
+    background-color: #fff9f7;
+}
+
 .home-header {
     display: flex;
     align-items: flex-start;
@@ -300,6 +309,134 @@
 .location-status-icon svg {
     width: 14px;
     height: 14px;
+}
+
+.checkin-result {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.result-icon {
+    display: grid;
+    width: 96px;
+    height: 96px;
+    place-items: center;
+    border-radius: 50%;
+    background: #2aa77b;
+    color: #fff;
+}
+
+.result-icon svg {
+    width: 52px;
+    height: 52px;
+    stroke-width: 3;
+}
+
+.checkin-result h1 {
+    margin: 12px 0 0;
+    color: #20936c;
+    font-size: 40px;
+    font-weight: 750;
+    letter-spacing: 0.02em;
+    line-height: 1.2;
+}
+
+.result-lead {
+    margin: 6px 0 0;
+    color: #419779;
+    font-size: 18px;
+    font-weight: 650;
+}
+
+.result-details {
+    width: 100%;
+    margin-top: 22px;
+    padding: 16px;
+    border: 1px solid #edf0f4;
+    border-radius: 19px;
+    background: #fff;
+    box-shadow: 0 3px 12px rgb(20 36 72 / 4%);
+}
+
+.result-time-row {
+    display: flex;
+    min-height: 36px;
+    align-items: center;
+    justify-content: space-between;
+    color: #617087;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.result-time-row span {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+}
+
+.result-time-row svg {
+    width: 20px;
+    height: 20px;
+    color: #45658c;
+}
+
+.result-time-row strong {
+    color: #1a2b4a;
+    font-size: 18px;
+    font-variant-numeric: tabular-nums;
+}
+
+.result-summary {
+    min-height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    margin-top: 12px;
+    border-radius: 999px;
+    background: #eaf7f1;
+    color: #288a69;
+    font-size: 13px;
+    font-weight: 650;
+}
+
+.result-summary strong {
+    font-size: 22px;
+    font-weight: 750;
+}
+
+.result-encouragement {
+    margin: 24px 0 0;
+    color: #287d62;
+    font-size: 15px;
+    font-weight: 700;
+}
+
+.checkin-result .school-art {
+    width: min(100%, 250px);
+    margin-top: 8px;
+}
+
+.checkin-result.is-late {
+    background-color: #fff9f7;
+}
+
+.checkin-result.is-late .result-icon {
+    background: #ed7458;
+}
+
+.checkin-result.is-late h1,
+.checkin-result.is-late .result-lead,
+.checkin-result.is-late .result-encouragement {
+    color: #df644d;
+}
+
+.checkin-result.is-late .result-summary {
+    background: #fff0ec;
+    color: #d96049;
 }
 
 .morning-illustration {
