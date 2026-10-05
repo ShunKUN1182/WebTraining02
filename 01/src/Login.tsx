@@ -1,4 +1,3 @@
-import { Icon } from "@iconify/react";
 import { Link } from "react-router-dom";
 import "./auth.css";
 
