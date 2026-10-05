@@ -72,6 +72,10 @@
     box-shadow: 0 2px 5px rgb(20 36 72 / 4%);
 }
 
+.schedule-row.is-late {
+    border-color: #f0cccc;
+}
+
 .schedule-time {
     display: flex;
     align-items: center;
@@ -126,6 +130,23 @@
 
 .countdown span:last-child {
     font-size: 16px;
+    font-weight: 700;
+}
+
+.countdown.is-late {
+    gap: 5px;
+    padding: 0 11px;
+    border-radius: 0;
+    background: #fff0ef;
+    color: #c64242;
+}
+
+.countdown.is-late strong {
+    font-size: 13px;
+}
+
+.countdown.is-late span {
+    font-size: 11px;
     font-weight: 700;
 }
 
@@ -186,6 +207,99 @@
     height: 21px;
     flex: 0 0 21px;
     color: #8b98ab;
+}
+
+.arrival-card {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    margin-top: 20px;
+    padding: 20px 16px 18px;
+    border-radius: 18px;
+    background: #edf8f3;
+}
+
+.arrival-message {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    color: #287d62;
+}
+
+.arrival-message > svg {
+    width: 30px;
+    height: 30px;
+    flex: 0 0 30px;
+    fill: #299b73;
+    stroke: #fff;
+    stroke-width: 1.5;
+}
+
+.arrival-message strong {
+    display: block;
+    font-size: 16px;
+    font-weight: 700;
+}
+
+.arrival-message p {
+    margin: 4px 0 0;
+    color: #39866e;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.checkin-button {
+    display: flex;
+    min-height: 60px;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    border: 0;
+    border-radius: 999px;
+    background: #28a879;
+    color: #fff;
+    font: inherit;
+    font-size: 17px;
+    font-weight: 700;
+}
+
+.checkin-button svg {
+    width: 22px;
+    height: 22px;
+    fill: #fff;
+    stroke: #28a879;
+    stroke-width: 1.8;
+}
+
+.location-status {
+    display: flex;
+    min-height: 72px;
+    align-items: center;
+    gap: 12px;
+    margin-top: 20px;
+    padding: 0 18px;
+    border-radius: 16px;
+    background: #f3f5f9;
+    color: #7b879b;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.location-status-icon {
+    display: grid;
+    width: 24px;
+    height: 24px;
+    place-items: center;
+    border: 2px solid #b7c5d8;
+    border-right-color: #3479de;
+    border-bottom-color: #3479de;
+    border-radius: 50%;
+    color: #3479de;
+}
+
+.location-status-icon svg {
+    width: 14px;
+    height: 14px;
 }
 
 .morning-illustration {
@@ -255,4 +369,37 @@
     margin-top: 14px;
     color: #8490a4;
     font-size: 14px;
+}
+
+.setting-group {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    margin-top: 32px;
+    padding: 20px;
+    border-radius: 16px;
+    background: #f3f6fb;
+}
+
+.setting-label {
+    color: #43516b;
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.setting-time-input {
+    min-height: 48px;
+    padding: 0 12px;
+    border: 1px solid #dce5f3;
+    border-radius: 10px;
+    background: #fff;
+    color: #1a2b4a;
+    font: inherit;
+    font-size: 18px;
+}
+
+.subpage .setting-help {
+    margin: 0;
+    font-size: 12px;
 }
