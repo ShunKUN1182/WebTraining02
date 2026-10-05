@@ -1,0 +1,159 @@
+.auth-screen {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+    padding: 38px 24px 28px;
+    color: #142448;
+    font-family: -apple-system, BlinkMacSystemFont, "Noto Sans JP", sans-serif;
+}
+
+.auth-brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #314566;
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.auth-brand-icon {
+    display: grid;
+    width: 38px;
+    height: 38px;
+    place-items: center;
+    border-radius: 12px;
+    background: #edf4ff;
+    color: #3479de;
+}
+
+.auth-brand-icon svg {
+    width: 21px;
+    height: 21px;
+}
+
+.auth-content {
+    width: 100%;
+    max-width: 360px;
+    margin: auto;
+    padding: 42px 0;
+}
+
+.auth-eyebrow {
+    margin: 0 0 10px;
+    color: #4380d0;
+    font-size: 11px;
+    font-weight: 750;
+    letter-spacing: 0.14em;
+}
+
+.auth-content h1 {
+    margin: 0;
+    color: #142448;
+    font-size: 28px;
+    font-weight: 750;
+    letter-spacing: 0.015em;
+}
+
+.auth-description {
+    margin: 9px 0 0;
+    color: #78869b;
+    font-size: 13px;
+    line-height: 1.7;
+}
+
+.auth-form {
+    display: flex;
+    flex-direction: column;
+    margin-top: 32px;
+}
+
+.auth-form label {
+    margin: 0 0 8px;
+    color: #344563;
+    font-size: 13px;
+    font-weight: 650;
+}
+
+.auth-form input {
+    width: 100%;
+    height: 50px;
+    margin: 0 0 20px;
+    padding: 0 14px;
+    border: 1px solid #dce4ef;
+    border-radius: 11px;
+    outline: none;
+    background: #fff;
+    color: #142448;
+    font: inherit;
+    font-size: 14px;
+    transition: border-color 120ms ease, box-shadow 120ms ease;
+}
+
+.auth-form input::placeholder {
+    color: #a1acbc;
+}
+
+.auth-form input:focus {
+    border-color: #79a7e5;
+    box-shadow: 0 0 0 3px rgb(52 121 222 / 12%);
+}
+
+.auth-primary-button {
+    width: 100%;
+    min-height: 52px;
+    margin-top: 6px;
+    border: 0;
+    border-radius: 12px;
+    background: #3479de;
+    color: #fff;
+    font: inherit;
+    font-size: 15px;
+    font-weight: 700;
+}
+
+.auth-switch {
+    margin: 23px 0 0;
+    color: #78869b;
+    font-size: 12px;
+    text-align: center;
+}
+
+.auth-switch a {
+    color: #3479de;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.auth-footnote {
+    margin: 0;
+    color: #9aa5b5;
+    font-size: 11px;
+    text-align: center;
+}
+
+.signup-screen .auth-content {
+    padding: 28px 0;
+}
+
+.signup-screen .auth-form {
+    margin-top: 24px;
+}
+
+.signup-screen .auth-form input {
+    margin-bottom: 15px;
+}
+
+@media (max-height: 720px) {
+    .auth-content {
+        padding: 24px 0;
+    }
+
+    .auth-form {
+        margin-top: 22px;
+    }
+
+    .auth-form input {
+        height: 46px;
+        margin-bottom: 14px;
+    }
+}
