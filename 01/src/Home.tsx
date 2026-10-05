@@ -2,11 +2,7 @@ import { Icon } from "@iconify/react";
 import { useNavigate } from "react-router-dom";
 import "./App.css";
 import { useState, useEffect } from "react";
-import {
-    DAILY_CHECK_IN_KEY,
-    DEFAULT_SCHOOL_START_TIME,
-    SCHOOL_START_TIME_KEY,
-} from "./settings.ts";
+import { DAILY_CHECK_IN_KEY, getSchoolStartTime } from "./settings.ts";
 import SchoolArt from "./SchoolArt.tsx";
 
 const schoolLocation = {
@@ -58,9 +54,7 @@ const readTodayCheckIn = (): DailyCheckIn | null => {
 function Home() {
     const navigate = useNavigate();
     const [nowTime, setNowTime] = useState("00:00");
-    const [schoolStartTime] = useState(
-        () => localStorage.getItem(SCHOOL_START_TIME_KEY) ?? DEFAULT_SCHOOL_START_TIME,
-    );
+    const schoolStartTime = getSchoolStartTime();
     const [isCheckInAvailable, setIsCheckInAvailable] = useState(false);
     const [isCheckedIn, setIsCheckedIn] = useState(() => readTodayCheckIn() !== null);
     const [checkInRecord, setCheckInRecord] = useState(() => readTodayCheckIn());
@@ -121,12 +115,12 @@ function Home() {
         schoolLocation.latitude,
         schoolLocation.longitude,
     );
-    const [startHour, startMinute] = schoolStartTime.split(":").map(Number);
+    const [startHour, startMinute] = (schoolStartTime ?? "00:00").split(":").map(Number);
     const startTimeInMinutes = startHour * 60 + startMinute;
     const now = new Date();
     const currentTimeInMinutes = now.getHours() * 60 + now.getMinutes();
     const minutesUntilStart = startTimeInMinutes - currentTimeInMinutes;
-    const isLate = minutesUntilStart < 0;
+    const isLate = schoolStartTime !== null && minutesUntilStart < 0;
     const checkedInMinutes = checkInRecord
         ? Number(checkInRecord.time.slice(0, 2)) * 60 + Number(checkInRecord.time.slice(3, 5))
         : 0;
@@ -138,6 +132,7 @@ function Home() {
     const resultMinutes = Math.abs(checkedInMinutes - checkedInStartMinutes);
 
     const handleCheckIn = () => {
+        if (!schoolStartTime) return;
         const now = new Date();
         const record: DailyCheckIn = {
             date: getDateKey(now),
@@ -151,9 +146,27 @@ function Home() {
 
     return (
         <main
-            className={`home-screen${isCheckedIn ? " is-result-screen" : ""}${isCheckedIn && isLateCheckIn ? " is-late-result" : ""}`}
+            className={`home-screen${isCheckedIn && schoolStartTime ? " is-result-screen" : ""}${isCheckedIn && schoolStartTime && isLateCheckIn ? " is-late-result" : ""}`}
         >
-            {isCheckedIn && checkInRecord ? (
+            {!schoolStartTime ? (
+                <section className="day-off-screen">
+                    <header className="home-header">
+                        <div>
+                            <h1>今日はおやすみ！</h1>
+                            <p>ゆっくり休んで、また次の登校日に。</p>
+                        </div>
+                        <button
+                            className="settings-button"
+                            type="button"
+                            aria-label="設定"
+                            onClick={() => navigate("/option")}
+                        >
+                            <Icon icon="lucide:settings" />
+                        </button>
+                    </header>
+                    <SchoolArt />
+                </section>
+            ) : isCheckedIn && checkInRecord ? (
                 <section className={`checkin-result ${isLateCheckIn ? "is-late" : "is-safe"}`}>
                     <div className="result-icon">
                         <Icon icon={isLateCheckIn ? "lucide:clock-3" : "lucide:check"} />

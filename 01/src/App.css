@@ -519,6 +519,49 @@
     background: #f3f6fb;
 }
 
+.day-off-screen {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+}
+
+.day-off-screen .school-art {
+    width: min(100%, 330px);
+    align-self: center;
+    margin: auto 0;
+}
+
+.school-schedule {
+    width: 100%;
+    margin: 0;
+}
+
+.school-schedule > div {
+    display: flex;
+    min-height: 48px;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid #e3e9f1;
+    color: #43516b;
+    font-size: 14px;
+}
+
+.school-schedule > div:last-child {
+    border-bottom: 0;
+}
+
+.school-schedule dt {
+    font-weight: 600;
+}
+
+.school-schedule dd {
+    margin: 0;
+    color: #1a2b4a;
+    font-size: 16px;
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+}
+
 .setting-label {
     color: #43516b;
     font-size: 14px;

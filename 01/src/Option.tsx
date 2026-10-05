@@ -1,31 +1,24 @@
-import { useState } from "react";
-import { DEFAULT_SCHOOL_START_TIME, SCHOOL_START_TIME_KEY } from "./settings.ts";
-
 function Option() {
-    const [schoolStartTime, setSchoolStartTime] = useState(
-        () => localStorage.getItem(SCHOOL_START_TIME_KEY) ?? DEFAULT_SCHOOL_START_TIME,
-    );
-
-    const updateSchoolStartTime = (value: string) => {
-        const nextValue = value || DEFAULT_SCHOOL_START_TIME;
-        setSchoolStartTime(nextValue);
-        localStorage.setItem(SCHOOL_START_TIME_KEY, nextValue);
-    };
-
     return (
         <main className="subpage">
             <h1>設定</h1>
             <p>学校や通知の設定を変更できます。</p>
-            <section className="setting-group">
-                <label className="setting-label" htmlFor="school-start-time">登校時間</label>
-                <input
-                    id="school-start-time"
-                    className="setting-time-input"
-                    type="time"
-                    value={schoolStartTime}
-                    onChange={(event) => updateSchoolStartTime(event.target.value)}
-                />
-                <p className="setting-help">ホーム画面の残り時間と遅刻表示に反映されます。</p>
+            <section className="setting-group" aria-label="曜日ごとの登校時間">
+                <h2 className="setting-label">曜日ごとの登校時間</h2>
+                <dl className="school-schedule">
+                    <div>
+                        <dt>月・火・木・金</dt>
+                        <dd>09:15</dd>
+                    </div>
+                    <div>
+                        <dt>水</dt>
+                        <dd>11:00</dd>
+                    </div>
+                    <div>
+                        <dt>土・日</dt>
+                        <dd>お休み</dd>
+                    </div>
+                </dl>
             </section>
         </main>
     );
