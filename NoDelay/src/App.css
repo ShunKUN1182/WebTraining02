@@ -544,6 +544,7 @@
     border-bottom: 1px solid #e3e9f1;
     color: #43516b;
     font-size: 14px;
+    padding: 8px 0;
 }
 
 .school-schedule > div:last-child {
@@ -555,11 +556,27 @@
 }
 
 .school-schedule dd {
+    display: flex;
+    align-items: center;
+    gap: 12px;
     margin: 0;
     color: #1a2b4a;
     font-size: 16px;
     font-weight: 700;
     font-variant-numeric: tabular-nums;
+}
+
+.school-schedule dd label {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: #43516b;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.setting-time-input:disabled {
+    opacity: 0.55;
 }
 
 .setting-label {
