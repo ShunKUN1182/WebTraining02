@@ -1,21 +1,50 @@
 import { Link } from "react-router-dom";
+import { useState } from "react";
 import "./auth.css";
 
 function Signup() {
+    const [name, setName] = useState("");
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+
+    const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+        event.preventDefault();
+        try {
+            const response = await fetch("https://fksm.tonkotsu.jp/toukou/signup.php", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    name,
+                    email,
+                    password,
+                }),
+            });
+
+            const data = await response.json();
+            console.log(data);
+        } catch (error) {
+            console.error(error);
+        }
+    };
+
     return (
         <main className="auth-screen signup-screen">
             <section className="auth-content">
-                <h1>新しくはじめる</h1>
-                <p className="auth-description">毎日の登校を記録して、続けた分だけ自信に。</p>
+                <h1>新規登録</h1>
+                <p className="auth-description">二度と遅刻しちゃだめと心に刻むのよ！！！</p>
 
-                <form className="auth-form" onSubmit={(event) => event.preventDefault()}>
+                <form className="auth-form" onSubmit={handleSubmit}>
                     <label htmlFor="signup-name">お名前</label>
                     <input
                         id="signup-name"
                         name="name"
                         type="text"
-                        placeholder="例：山田 太郎"
+                        placeholder="例：睡井 寝坊助"
                         autoComplete="name"
+                        value={name}
+                        onChange={(e) => setName(e.target.value)}
                         required
                     />
 
@@ -24,8 +53,10 @@ function Signup() {
                         id="signup-email"
                         name="email"
                         type="email"
-                        placeholder="name@example.com"
+                        placeholder="toukou@ecc.ac.jp"
                         autoComplete="email"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
                         required
                     />
 
@@ -37,6 +68,8 @@ function Signup() {
                         placeholder="8文字以上"
                         autoComplete="new-password"
                         minLength={8}
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
                         required
                     />
 

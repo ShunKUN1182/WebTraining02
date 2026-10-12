@@ -5,22 +5,37 @@ require_once __DIR__ . "/config.php";
 class Model
 {
   private ?PDO $db = null;
+  private ?PDOStatement $stmt = null;
+
   public function __construct()
   {
     if (is_null($this->db)) {
       $this->connect();
     }
   }
+
+  // DBへの接続
   private function connect(): void
   {
     $this->db = new PDO(DB_DSN, DB_USER, DB_PASS);
   }
-  public function query(string $sql): array
+
+  // SQL実行
+  public function query(string $sql): self
   {
-    $stmt = $this->db->query($sql);
-    $stmt->execute();
+    $this->stmt = $this->db->query($sql);
+    $this->stmt->execute();
+    return $this;
+  }
+
+  // 実行結果を取り出す
+  public function getData(): array
+  {
+    if (is_null($this->stmt)) {
+      return [];
+    }
     $result = [];
-    while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+    while ($row = $this->stmt->fetch(PDO::FETCH_ASSOC)) {
       $result[] = $row;
     }
     return $result;
