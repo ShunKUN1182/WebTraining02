@@ -29,9 +29,12 @@ function Signup() {
             if (response.ok && result.success) {
                 alert(result.message);
                 navigate("/home");
+            } else {
+                alert(result.message);
             }
         } catch (error) {
             console.error(error);
+            alert("サーバーとの通信に失敗しました");
         }
     };
 
