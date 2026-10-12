@@ -9,7 +9,7 @@ function Signup() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
-    const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    const handleSubmit = async (event: React.SubmitEvent<HTMLFormElement>) => {
         event.preventDefault();
         try {
             const response = await fetch("https://fksm.tonkotsu.jp/toukou/signup.php", {
@@ -28,6 +28,7 @@ function Signup() {
 
             if (response.ok && result.success) {
                 alert(result.message);
+                localStorage.setItem("user", JSON.stringify(result.data));
                 navigate("/home");
             } else {
                 alert(result.message);
