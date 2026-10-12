@@ -30,8 +30,18 @@ $sql = "
 
 try {
   $model = new Model();
-  $model->query($sql);
+  $model->query($sql, [
+    ":name" => $name,
+    ":email" => $email,
+    ":password" => $hashedPassword,
+  ]);
+
+  echo json_encode([
+    "success" => true,
+    "message" =>  "新規登録に成功しました"
+  ]);
 } catch (PDOException $error) {
+  http_response_code(500);
   echo json_encode([
     "success" => false,
     "message" => "新規登録に失敗しました",

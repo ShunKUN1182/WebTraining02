@@ -21,10 +21,10 @@ class Model
   }
 
   // SQL実行
-  public function query(string $sql): self
+  public function query(string $sql, array $params = []): self
   {
-    $this->stmt = $this->db->query($sql);
-    $this->stmt->execute();
+    $this->stmt = $this->db->prepare($sql);
+    $this->stmt->execute($params);
     return $this;
   }
 
