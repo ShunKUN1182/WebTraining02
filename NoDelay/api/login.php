@@ -1,9 +1,25 @@
 <?php
-header("Access-Control-Allow-Origin: *");
-header("Access-Control-Allow-Methods: POST,OPTIONS");
+session_start();
+$allowedOrigins = [
+  "http://localhost:5173",
+  "https://toukou-shomei.vercel.app",
+];
+
+$origin = $_SERVER["HTTP_ORIGIN"] ?? "";
+
+if (in_array($origin, $allowedOrigins, true)) {
+  header("Access-Control-Allow-Origin: " . $origin);
+  header("Access-Control-Allow-Credentials: true");
+}
+
+header("Access-Control-Allow-Methods: POST, OPTIONS");
 header("Access-Control-Allow-Headers: Content-Type");
 header("Content-Type: application/json; charset=UTF-8");
 
+if ($_SERVER["REQUEST_METHOD"] === "OPTIONS") {
+  http_response_code(204);
+  exit;
+}
 require_once __DIR__ . "/Model.php";
 
 $data = json_decode(file_get_contents("php://input"), true);
@@ -24,6 +40,15 @@ try {
   $user = $model->query($sql, [
     ":email" => $email,
   ])->getData();
+
+  if (!$user) {
+    echo json_encode([
+      "success" => false,
+      "message" => "メールアドレスまたはパスワードが正しくありません"
+    ]);
+    exit;
+  }
+
   $userData = $user[0];
 
   if (!$userData) {
@@ -39,10 +64,13 @@ try {
       "success" => false,
       "message" => "メールアドレスまたはパスワードが正しくありません",
       "data" => $userData,
-
     ]);
     exit;
   }
+
+  session_regenerate_id(true);
+  $_SESSION["user_id"] = $userData["user_id"];
+  $_SESSION["user_name"] = $userData["user_name"];
 
   unset($userData["user_password"]);
 
@@ -52,10 +80,10 @@ try {
     "data" => $userData,
   ]);
 } catch (PDOException $error) {
+  error_log($error->getMessage());
   http_response_code(500);
   echo json_encode([
     "success" => false,
     "message" => "ログインに失敗しました",
-    "error" => $error->getMessage()
   ]);
 }

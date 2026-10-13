@@ -11,6 +11,7 @@ function Login() {
         try {
             const response = await fetch("https://fksm.tonkotsu.jp/toukou/login.php", {
                 method: "POST",
+                credentials: "include",
                 headers: {
                     "Content-Type": "application/json",
                 },

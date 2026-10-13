@@ -1,0 +1,144 @@
+.history-page {
+    padding-top: 42px;
+    background: #f8f9fc;
+}
+
+.history-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 26px;
+}
+
+.history-header h1 {
+    color: #142448;
+    font-size: 27px;
+    font-weight: 750;
+    letter-spacing: 0.015em;
+}
+
+.history-header p {
+    margin: 5px 0 0;
+    color: #8490a4;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.history-month {
+    padding: 8px 13px;
+    border: 1px solid #e0e6ef;
+    border-radius: 999px;
+    background: #fff;
+    color: #53627a;
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.history-list {
+    display: flex;
+    flex-direction: column;
+    gap: 13px;
+}
+
+.history-card {
+    overflow: hidden;
+    padding: 17px 16px 14px;
+    border: 1px solid #dcefe5;
+    border-radius: 17px;
+    background: #fff;
+    box-shadow: 0 3px 10px rgb(20 36 72 / 3%);
+}
+
+.history-card.is-late {
+    border-color: #f3d9d2;
+}
+
+.history-card-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: 13px;
+    border-bottom: 1px solid #edf0f4;
+}
+
+.history-card-top h2 {
+    margin: 0;
+    color: #1a2b4a;
+    font-size: 16px;
+    font-weight: 700;
+}
+
+.history-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 5px 10px;
+    border-radius: 999px;
+    background: #eaf7f0;
+    color: #288a69;
+    font-size: 12px;
+    font-weight: 750;
+}
+
+.history-status i {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #35a77b;
+}
+
+.is-late .history-status {
+    background: #fff0ec;
+    color: #d96049;
+}
+
+.is-late .history-status i {
+    background: #e7765d;
+}
+
+.history-times {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    padding: 13px 0 12px;
+}
+
+.history-times div {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.history-times div + div {
+    padding-left: 14px;
+    border-left: 1px solid #edf0f4;
+}
+
+.history-times span {
+    color: #8490a4;
+    font-size: 11px;
+    font-weight: 600;
+}
+
+.history-times strong {
+    color: #243657;
+    font-size: 21px;
+    font-variant-numeric: tabular-nums;
+    font-weight: 750;
+    line-height: 1.15;
+}
+
+.history-difference {
+    padding: 9px 11px;
+    border-radius: 10px;
+    background: #eff8f3;
+    color: #288a69;
+    font-size: 13px;
+    font-weight: 700;
+    text-align: center;
+}
+
+.is-late .history-difference {
+    background: #fff3f0;
+    color: #d96049;
+}
