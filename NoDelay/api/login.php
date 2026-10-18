@@ -1,4 +1,5 @@
 <?php
+
 $allowedOrigins = [
   "http://localhost:5173",
   "https://web-training02.vercel.app"
@@ -8,6 +9,7 @@ $origin = $_SERVER["HTTP_ORIGIN"] ?? "";
 
 if (in_array($origin, $allowedOrigins, true)) {
   header("Access-Control-Allow-Origin: " . $origin);
+  header("Access-Control-Allow-Credentials: true");
   header("Vary: Origin");
 }
 
@@ -19,10 +21,10 @@ if ($_SERVER["REQUEST_METHOD"] === "OPTIONS") {
   exit;
 }
 
+session_start();
+
 header("Content-Type: application/json; charset=UTF-8");
-
 require_once __DIR__ . "/Model.php";
-
 $data = json_decode(file_get_contents("php://input"), true);
 $email = $data["email"] ?? "";
 $password = $data["password"] ?? "";
