@@ -17,12 +17,34 @@ function AppLayout() {
     );
 }
 
+function hasLoggedInUser() {
+    const savedUser = localStorage.getItem("user");
+    if (!savedUser) return false;
+
+    try {
+        const user: unknown = JSON.parse(savedUser);
+        return (
+            typeof user === "object" &&
+            user !== null &&
+            "user_id" in user &&
+            Boolean(user.user_id)
+        );
+    } catch {
+        localStorage.removeItem("user");
+        return false;
+    }
+}
+
+function ProtectedLayout() {
+    return hasLoggedInUser() ? <AppLayout /> : <Navigate to="/login" replace />;
+}
+
 function App() {
     return (
         <Routes>
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Signup />} />
-            <Route element={<AppLayout />}>
+            <Route element={<ProtectedLayout />}>
                 <Route index element={<Navigate to="/home" replace />} />
                 <Route path="/home" element={<Home />} />
                 <Route path="/history" element={<History />} />
