@@ -1,12 +1,12 @@
 import { Navigate, Outlet, Route, Routes } from "react-router-dom";
 import Footer from "./components/Footer.tsx";
-import Home from "./Home.tsx";
-import History from "./History.tsx";
-import Calendar from "./Calendar.tsx";
-import Statistics from "./Statistics.tsx";
-import Option from "./Option.tsx";
-import Login from "./Login.tsx";
-import Signup from "./Signup.tsx";
+import Home from "./page/Home.tsx";
+import History from "./page/History.tsx";
+import Calendar from "./page/Calendar.tsx";
+import Statistics from "./page/Statistics.tsx";
+import Option from "./page/Option.tsx";
+import Login from "./page/Login.tsx";
+import Signup from "./page/Signup.tsx";
 
 function AppLayout() {
     return (

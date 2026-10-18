@@ -1,31 +1,27 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
-import "./auth.css";
+import "../css/auth.css";
 
-function Signup() {
+function Login() {
     const navigate = useNavigate();
-
-    const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-
     const handleSubmit = async (event: React.SubmitEvent<HTMLFormElement>) => {
         event.preventDefault();
         try {
-            const response = await fetch("https://fksm.tonkotsu.jp/toukou/signup.php", {
+            const response = await fetch("https://fksm.tonkotsu.jp/toukou/login.php", {
                 method: "POST",
+                credentials: "include",
                 headers: {
                     "Content-Type": "application/json",
                 },
                 body: JSON.stringify({
-                    name,
                     email,
                     password,
                 }),
             });
-
             const result = await response.json();
-
+            console.log(result);
             if (response.ok && result.success) {
                 alert(result.message);
                 localStorage.setItem("user", JSON.stringify(result.data));
@@ -34,62 +30,48 @@ function Signup() {
                 alert(result.message);
             }
         } catch (error) {
-            console.error(error);
             alert("サーバーとの通信に失敗しました");
+            console.log(error);
         }
     };
-
     return (
-        <main className="auth-screen signup-screen">
+        <main className="auth-screen">
             <section className="auth-content">
-                <h1>新規登録</h1>
-                <p className="auth-description">二度と遅刻しちゃだめと心に刻むのよ！！！</p>
+                <h1>おかえりなさい</h1>
+                <p className="auth-description">ログインして、今日の登校状況を確認しましょう。</p>
 
                 <form className="auth-form" onSubmit={handleSubmit}>
-                    <label htmlFor="signup-name">お名前</label>
+                    <label htmlFor="login-email">メールアドレス</label>
                     <input
-                        id="signup-name"
-                        name="name"
-                        type="text"
-                        placeholder="例：睡井 寝坊助"
-                        autoComplete="name"
-                        value={name}
-                        onChange={(e) => setName(e.target.value)}
-                        required
-                    />
-
-                    <label htmlFor="signup-email">メールアドレス</label>
-                    <input
-                        id="signup-email"
+                        id="login-email"
                         name="email"
                         type="email"
-                        placeholder="toukou@ecc.ac.jp"
+                        placeholder="name@example.com"
                         autoComplete="email"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                         required
                     />
 
-                    <label htmlFor="signup-password">パスワード</label>
+                    <label htmlFor="login-password">パスワード</label>
                     <input
-                        id="signup-password"
+                        id="login-password"
                         name="password"
                         type="password"
-                        placeholder="8文字以上"
-                        autoComplete="new-password"
-                        minLength={8}
+                        placeholder="パスワードを入力"
+                        autoComplete="current-password"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
                         required
                     />
 
                     <button className="auth-primary-button" type="submit">
-                        アカウントを作成
+                        ログイン
                     </button>
                 </form>
 
                 <p className="auth-switch">
-                    すでにアカウントをお持ちの方は <Link to="/login">ログイン</Link>
+                    アカウントをお持ちでない方は <Link to="/signup">新規登録</Link>
                 </p>
             </section>
 
@@ -98,4 +80,4 @@ function Signup() {
     );
 }
 
-export default Signup;
+export default Login;

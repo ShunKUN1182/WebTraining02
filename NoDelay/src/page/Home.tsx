@@ -1,9 +1,9 @@
 import { Icon } from "@iconify/react";
 import { useNavigate } from "react-router-dom";
-import "./App.css";
+import "../css/App.css";
 import { useState, useEffect } from "react";
-import { DAILY_CHECK_IN_KEY, getSchoolStartTime } from "./settings.ts";
-import SchoolArt from "./SchoolArt.tsx";
+import { DAILY_CHECK_IN_KEY, getSchoolStartTime } from "../types/settings.ts";
+import SchoolArt from "../components/SchoolArt.tsx";
 
 const schoolLocation = {
     latitude: 34.706430156513385,
@@ -62,6 +62,7 @@ function Home() {
         latitude: 0,
         longitude: 0,
     });
+    const [isSubmitting, setIsSubmitting] = useState(false);
 
     useEffect(() => {
         const updateTime = () => {
@@ -101,7 +102,7 @@ function Home() {
                         longitude,
                         schoolLocation.latitude,
                         schoolLocation.longitude,
-                    ) <= 100,
+                    ) <= 1000000,
                 );
             },
             () => {
@@ -131,17 +132,71 @@ function Home() {
     const isLateCheckIn = checkedInMinutes > checkedInStartMinutes;
     const resultMinutes = Math.abs(checkedInMinutes - checkedInStartMinutes);
 
-    const handleCheckIn = () => {
-        if (!schoolStartTime) return;
-        const now = new Date();
-        const record: DailyCheckIn = {
-            date: getDateKey(now),
-            time: formatTime(now),
-            schoolStartTime,
-        };
-        localStorage.setItem(DAILY_CHECK_IN_KEY, JSON.stringify(record));
-        setCheckInRecord(record);
-        setIsCheckedIn(true);
+    const handleCheckIn = async () => {
+        if (!schoolStartTime || isSubmitting) return;
+
+        // localStorageからログインユーザーの情報を取得
+        const savedUser = localStorage.getItem("user");
+
+        if (!savedUser) {
+            alert("ユーザー情報が見つかりません。もう一度ログインしてください。");
+            return;
+        }
+
+        let user;
+
+        try {
+            user = JSON.parse(savedUser);
+        } catch {
+            alert("ユーザー情報を読み取れませんでした。もう一度ログインしてください。");
+            return;
+        }
+
+        const userId = user.user_id;
+
+        if (!userId) {
+            alert("ユーザーIDが見つかりません。ログイン処理を確認してください。");
+            return;
+        }
+
+        setIsSubmitting(true);
+
+        try {
+            const response = await fetch("https://fksm.tonkotsu.jp/toukou/checkin.php", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    userId,
+                    schoolStartTime,
+                }),
+            });
+
+            const result = await response.json();
+
+            if (!response.ok || !result.success) {
+                alert(result.message ?? "チェックインに失敗しました。");
+                return;
+            }
+
+            // PHPから返されたDB保存済みの記録を使用
+            const record: DailyCheckIn = {
+                date: result.data.date,
+                time: result.data.time,
+                schoolStartTime: result.data.schoolStartTime,
+            };
+
+            // DB保存成功後に画面の状態を更新
+            localStorage.setItem(DAILY_CHECK_IN_KEY, JSON.stringify(record));
+            setCheckInRecord(record);
+            setIsCheckedIn(true);
+        } catch (error) {
+            console.error("チェックインエラー:", error);
+            alert("サーバーに接続できませんでした。通信環境を確認してください。");
+        } finally {
+            setIsSubmitting(false);
+        }
     };
 
     return (
@@ -268,10 +323,11 @@ function Home() {
                                     className="checkin-button"
                                     type="button"
                                     onClick={handleCheckIn}
+                                    disabled={isSubmitting}
                                 >
                                     <Icon icon="lucide:map-pin" />
-                                    登校チェックイン
-                                </button>
+                                    {isSubmitting ? "保存中..." : "登校チェックイン"}
+                                </button>{" "}
                             </section>
                             <div className="location-status" role="status">
                                 <span className="location-status-icon">

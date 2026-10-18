@@ -5,7 +5,7 @@ import {
     saveWeeklySchedule,
     WEEKDAYS,
     type WeeklySchedule,
-} from "./settings.ts";
+} from "../types/settings.ts";
 
 function Option() {
     const [schedule, setSchedule] = useState(getWeeklySchedule);

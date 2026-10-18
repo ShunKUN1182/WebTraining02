@@ -1,6 +1,6 @@
 import { Icon } from "@iconify/react";
 import { NavLink } from "react-router-dom";
-import "./footer.css";
+import "../css/footer.css";
 
 const navigationItems = [
     { to: "/home", label: "ホーム", icon: "bx:home" },
