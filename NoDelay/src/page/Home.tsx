@@ -102,7 +102,7 @@ function Home() {
                         longitude,
                         schoolLocation.latitude,
                         schoolLocation.longitude,
-                    ) <= 1000000,
+                    ) <= 50,
                 );
             },
             () => {
