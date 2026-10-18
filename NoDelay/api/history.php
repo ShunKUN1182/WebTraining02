@@ -2,7 +2,7 @@
 
 $allowedOrigins = [
   "http://localhost:5173",
-  "https://toukou-shomei.vercel.app",
+  "https://web-training02.vercel.app",
 ];
 
 $origin = $_SERVER["HTTP_ORIGIN"] ?? "";
