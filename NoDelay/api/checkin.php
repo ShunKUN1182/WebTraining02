@@ -1,26 +1,25 @@
 <?php
-
 $allowedOrigins = [
   "http://localhost:5173",
-  "https://web-training02.vercel.app",
+  "https://web-training02.vercel.app"
 ];
 
 $origin = $_SERVER["HTTP_ORIGIN"] ?? "";
 
 if (in_array($origin, $allowedOrigins, true)) {
   header("Access-Control-Allow-Origin: " . $origin);
+  header("Vary: Origin");
 }
 
-header("Vary: Origin");
-header("Access-Control-Allow-Methods: POST, OPTIONS");
+header("Access-Control-Allow-Methods: POST, GET, OPTIONS");
 header("Access-Control-Allow-Headers: Content-Type");
-header("Content-Type: application/json; charset=UTF-8");
 
-// 事前確認の通信は、ここで処理を終了する
 if ($_SERVER["REQUEST_METHOD"] === "OPTIONS") {
   http_response_code(204);
   exit;
 }
+
+header("Content-Type: application/json; charset=UTF-8");
 
 // POST以外の通信は拒否する
 if ($_SERVER["REQUEST_METHOD"] !== "POST") {
